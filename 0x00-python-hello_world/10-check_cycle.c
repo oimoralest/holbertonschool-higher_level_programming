@@ -8,13 +8,9 @@ int check_cycle(listint_t *list)
 {
 	listint_t *aux, *aux2;
 
-	if (!list)
+	if (!list || !list->next)
 	{
-		return (-1);
-	}
-	else if (!list->next)
-	{
-		return (-1);
+		return (0);
 	}
 	else
 	{
