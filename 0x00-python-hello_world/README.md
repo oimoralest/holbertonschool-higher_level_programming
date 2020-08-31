@@ -23,6 +23,4 @@ This project is an introduction to the high level programming language in Python
 
 ## Author
 
-Oscar Morales
-
-## [Twitter](https://twitter.com/oi_moralest)
+Oscar Morales. Follow me on: [Twitter](https://twitter.com/oi_moralest)
