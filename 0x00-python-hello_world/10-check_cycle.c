@@ -9,9 +9,13 @@ int check_cycle(listint_t *list)
 	listint_t *aux, *aux2;
 
 	if (!list)
+	{
 		return (-1);
+	}
 	else if (!list->next)
+	{
 		return (-1);
+	}
 	else
 	{
 		aux = list, aux2 = list;
