@@ -14,10 +14,10 @@ int check_cycle(listint_t *list)
 	}
 	else
 	{
-		aux = list, aux2 = list;
+		aux = list, aux2 = list->next;
+		while (aux != aux2 && aux2->next && aux2->next->next
+			&& aux->next)
 		aux = aux->next, aux2 = aux2->next->next;
-		while (aux != aux2 && aux2 && aux)
-			aux = aux->next, aux2 = aux2->next->next;
 		if (aux == aux2)
 			return (1);
 		else
