@@ -14,7 +14,7 @@ This project is about loops and functions in Python
 |[3-print_alphabt.py](./3-print_alphabt.py)| Python script that prints the ASCII alphabet in lowercase except the q and e letters |
 |[4-print_hexa.py](./4-print_hexa.py)| Python script that prints the number from 0 to 98 in decimal and hexadecimal |
 |[5-print_comb2.py](./5-print_comb2.py)| Python script that prints the number from 0 to 98 following a expecific format |
-|[6-print_comb3.py](./6-print_comb3.py)| Python script that prints all posible of two digits |
+|[6-print_comb3.py](./6-print_comb3.py)| Python script that prints all posible combination of two digits |
 |[7-islower.py](./7-islower.py)| Python function that checks for lowercase character |
 |[8-uppercase.py](./8-uppercase.py)| Python function that prints a string in uppercase|
 |[9-print_last_digit.py](./9-print_last_digit.py)| Python function that prints the las digit of a number |
