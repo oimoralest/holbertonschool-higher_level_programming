@@ -7,7 +7,7 @@ This project is about loops and functions in Python
 ## Content
 
 |File|Description|
-|---|---|
+|----|---|
 | [0-positive_or_negative.py](./0-positive_or_negative.py) | Python script that prints if a number is greater, equal, or less than 0. [Source code](https://github.com/holbertonschool/0x01.py/blob/master/0-positive_or_negative_py)|
 |[1-last_digit.py](./1-last_digit.py)| Python script that prints if the last digit of a number is greater than 5, or it is 0, or it is less than 6 and is not 0. [Source code](https://github.com/holbertonschool/0x01.py/blob/master/1-last_digit_py)|
 |[2-print_alphabet.py](./2-print_alphabet.py)| Python script that prints the ASCII alphabet in lowercase |
