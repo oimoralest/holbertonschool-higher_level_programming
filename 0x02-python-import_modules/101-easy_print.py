@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-exec("from subprocess import run\nrun(\"echo #pythoniscool\".split())")
+exec('from os import write\nwrite(1, "#pythoniscool\\n".encode())')
