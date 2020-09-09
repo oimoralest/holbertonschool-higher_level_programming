@@ -1,36 +1,46 @@
 #include "lists.h"
 /**
- *list_len - returns the number of elements in a linked list_t list
- *@h: list
+ *is_palindrome - return if a string is palindrome
+ *@s: pointer to the string
  *
- *Return: n number of elements in @h
+ *Return: 1 if is palindrome
+ *        0 if is not
  */
-size_t list_len(const listint_t *h)
+
+int is_palindrome_buffer(char *s)
 {
-	size_t n = 0;
-	const listint_t *ptr;
+	char *fp;
 
-	ptr = h;
-	while (ptr)
-		ptr = ptr->next, n++;
+	fp = final_position(s);
 
-	return (n);
+	return (palindrome(s, fp));
 }
+
 /**
- *get_nodeint_at_index - returns the nth node of a listint_t list
- *@head: head of the list
- *@index: nth node to search
+ *final_position - returns a pointer to the final position of a string
+ *@s: pointer to the string
  *
- *Return: NULL if the node does not exist or address of the nth node
+ *Return: fp final position of the string
  */
-listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
+
+char *final_position(char *s)
 {
-	unsigned int counter = 0;
+	return (*s == '\0' ? (s - 1) : final_position(s + 1));
+}
 
-	while (head && counter < index)
-		head = head->next, counter++;
+/**
+ *palindrome - check if a string is palindrome or not
+ *@s: pointer to the initial position of the string
+ *@fp: pointer to the final position of the string
+ *
+ *Return: 1 if is palindrome
+ *        0 if is not
+ */
 
-	return (head);
+int palindrome(char *s, char *fp)
+{
+	return (*s != *fp ? 0 : s == fp || s > fp ? 1 :
+		palindrome(s + 1, fp - 1));
 }
 /**
  * is_palindrome - checks if a singly list is a palindrome
@@ -39,23 +49,22 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *aux, *aux2;
-	unsigned int len = 0;
+	listint_t *aux;
+	char buffer[10000];
+	unsigned int i = 0, _ret = 0;
 
 	if (!head || !*head)
 		return (1);
 	if (!(*head)->next)
 		return (1);
-	len = list_len(*head);
 	aux = *head;
-	aux2 = get_nodeint_at_index(*head, --len);
-	while (aux->n == aux2->n)
+	while (aux)
 	{
-		if (aux->next == aux2 || aux->next->next == aux2)
-			return (1);
-		aux = aux->next;
-		aux2 = get_nodeint_at_index(*head, --len);
+		buffer[i] = aux->n + '0';
+		aux = aux->next, i++;
 	}
+	buffer[i] = '\0';
+	_ret = is_palindrome_buffer(buffer);
 
-	return (0);
+	return (_ret);
 }
