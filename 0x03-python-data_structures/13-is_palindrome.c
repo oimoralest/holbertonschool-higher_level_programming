@@ -50,7 +50,7 @@ int palindrome(char *s, char *fp)
 int is_palindrome(listint_t **head)
 {
 	listint_t *aux;
-	char buffer[10000];
+	char buffer[100000];
 	unsigned int i = 0, _ret = 0;
 
 	if (!head || !*head)
