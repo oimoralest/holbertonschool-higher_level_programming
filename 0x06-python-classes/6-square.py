@@ -18,6 +18,7 @@ class Square:
         Returns: None
         """
         self.size = size
+        self.position = position
 
     @property
     def size(self):
@@ -84,7 +85,7 @@ class Square:
         return self.__size ** 2
 
     def my_print(self):
-        """ Draws the square with # representation
+        """ Draws the square with # representation and position
 
         Return:
             None
@@ -92,5 +93,9 @@ class Square:
         if self.__size == 0:
             print()
             return
+        if self.__position:
+            for i in range(self.__position[1]):
+                print()
         for i in range(self.__size):
+            print("".join(" " for j in range(self.__position[0])), end="")
             print("".join("#" for j in range(self.__size)))
