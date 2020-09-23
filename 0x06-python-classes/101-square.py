@@ -104,7 +104,7 @@ class Square:
         """Prints the linked list
 
         Returns:
-            None
+            string with a printable format of the square
         """
         string = ""
         if self.__size == 0:
