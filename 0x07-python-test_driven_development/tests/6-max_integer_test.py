@@ -6,6 +6,7 @@ max_integer = __import__('6-max_integer').max_integer
 
 
 class TestMaxInteger(unittest.TestCase):
+    """This class tests the max_integer function"""
 
     def test_max(self):
         """Check output for normal input"""
@@ -43,6 +44,7 @@ class TestMaxInteger(unittest.TestCase):
             _max = max_integer(_list)
 
     def test_inf(self):
+        """"Check for infinte values""" 
         _list = [float('inf'), float('inf')]
         with self.assertRaises(TypeError):
             _max = max_integer(_list)
@@ -53,10 +55,12 @@ class TestMaxInteger(unittest.TestCase):
         self.assertTrue(m is not None and len(m) > 0)
 
     def test_docstringfunc(self):
+        """"Check docstring for function"""
         f = __import__('6-max_integer').max_integer.__doc__
         self.assertTrue(f is not None and len(f) > 5)
 
     def test_morethan(self):
+        """"Check for more than 1 argument supplied"""
         with self.assertRaises(TypeError):
             _max = max_integer(1, 1)
 
