@@ -11,14 +11,10 @@ def text_indentation(text):
     prints a text with 2 new lines after each of these characters: ., ? and :
     """
     if type(text) is str:
-        for i in text:
-            if i in [":", ".", "?"]:
-                j = text.index(i)
-                if (j + 1 < len(text)) and text[j + 1] == " ":
-                    text = text[:j + 1] + "\n\n" + text[j + 3:]
-                else:
-                    text = text[:j + 1] + "\n\n" + text[j + 1:]
-        text = text.strip(" ")
-        print(text, end="")
+        _text = text.replace(".", ".\n\n").replace(":", ":\n\n")\
+            .replace("?", "?\n\n")
+        _text = _text.splitlines(True)
+        for line in _text:
+            print(line.strip(" "), end="")
     else:
         raise TypeError("text must be a string")
