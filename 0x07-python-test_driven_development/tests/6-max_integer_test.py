@@ -11,7 +11,9 @@ class TestMaxInteger(unittest.TestCase):
     def test_max(self):
         """Check output for normal input"""
         self.assertEqual(max_integer([1, 50, 2]), 50)
+        self.assertEqual(max_integer([1, 5, 20]), 20)
         self.assertEqual(max_integer([-5, -10, -9]), -5)
+        self.assertEqual(max_integer([-5, 10, 9]), 10)
         self.assertEqual(max_integer([1]), 1)
         self.assertEqual(max_integer([1, 1, 1, 1]), 1)
         self.assertEqual(max_integer([2, 4] * 3), 4)
@@ -23,12 +25,7 @@ class TestMaxInteger(unittest.TestCase):
     def test_tuple(self):
         """Check for different types of input"""
         with self.assertRaises(TypeError):
-            _max = max_integer((2, 3))
-
-    def test_None(self):
-        """Check for different types of input"""
-        with self.assertRaises(TypeError):
-            _max = max_integer(None)
+            _max = max_integer((3, 2, "L"))
 
     def test_big_number(self):
         """Check for big numbers"""
@@ -36,18 +33,6 @@ class TestMaxInteger(unittest.TestCase):
                  13524654351321324135461321354]
         self.assertEqual(max_integer(_list),
                          2135456413213546541321324163463123132746)
-
-    def test_float(self):
-        """Check for floats"""
-        _list = [2.3, 5.6, 7.8]
-        with self.assertRaises(TypeError):
-            _max = max_integer(_list)
-
-    def test_inf(self):
-        """"Check for infinte values""" 
-        _list = [float('inf'), float('inf')]
-        with self.assertRaises(TypeError):
-            _max = max_integer(_list)
 
     def test_docstringmod(self):
         """Check docstring for module"""
@@ -59,10 +44,6 @@ class TestMaxInteger(unittest.TestCase):
         f = __import__('6-max_integer').max_integer.__doc__
         self.assertTrue(f is not None and len(f) > 5)
 
-    def test_morethan(self):
-        """"Check for more than 1 argument supplied"""
-        with self.assertRaises(TypeError):
-            _max = max_integer(1, 1)
 
 if __name__ == '__main__':
     unittest.main()
