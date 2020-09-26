@@ -1,0 +1,54 @@
+The ``101-matrix_mul module``
+=============================
+
+Using ``lazy_matrix_mul``
+-------------------------
+Checking docstring for module:
+    >>> __import__('101-lazy_matrix_mul').__doc__ != None
+    True
+
+importing the module:
+    >>> matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+Check docstring for function:
+    >>> len(matrix_mul.__doc__) > 0
+    True
+
+Checking normal values:
+    >>> print(matrix_mul([[1, 2], [4, 5]],[[1, 2], [4, 5]]))
+    [[ 9 12]
+     [24 33]]
+
+Checking wrong product:
+    >>> print(matrix_mul([[1, 2], [4, 5]],[[5]]))
+    Traceback (most recent call last):
+        ...
+    ValueError: shapes (2,2) and (1,1) not aligned: 2 (dim 1) != 1 (dim 0)
+
+Checking second matrix not list of lists:
+    >>> print(matrix_mul([[4, 5]], [4, 5]))
+    [41]
+
+Checking matrix with empty rows:
+    >>> print(matrix_mul([],[[1, 2], [4, 5]]))
+    Traceback (most recent call last):
+            ...
+    ValueError: shapes (0,) and (2,2) not aligned: 0 (dim 0) != 2 (dim 0)
+
+Matrix with non-list or non-list of lists:
+    >>> print(matrix_mul("Holberton", [4, 5]))
+    Traceback (most recent call last):
+        ...
+    ValueError: Scalar operands are not allowed, use '*' instead
+
+Calling function with 1 argument:
+    >>> print(matrix_mul([4]))
+    Traceback (most recent call last):
+        ...
+    TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
+
+Calling function without arguments:
+    >>> print(matrix_mul())
+    Traceback (most recent call last):
+        ...
+    TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
