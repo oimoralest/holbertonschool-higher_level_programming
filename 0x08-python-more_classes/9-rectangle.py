@@ -18,8 +18,8 @@ class Rectangle():
             width (int, optional): width of the rectangle. Defaults to 0.
             height (int, optional): height of the rectangle. Defaults to 0.
         """
-        self.__width = width
-        self.__height = height
+        self.width = width
+        self.height = height
         Rectangle.number_of_instances += 1
 
     @property
@@ -55,7 +55,7 @@ class Rectangle():
         Returns:
             int: private instance attribute height
         """
-        return self.__width
+        return self.__height
 
     @height.setter
     def height(self, value):
