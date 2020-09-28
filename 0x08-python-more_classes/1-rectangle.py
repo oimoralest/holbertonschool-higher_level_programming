@@ -5,8 +5,11 @@ This module defines a class called Rectangle
 
 
 class Rectangle():
+    """
+    This class defines a representation of a rectang
+    """
     def __init__(self, width=0, height=0):
-        """This class defines a representation of a rectangle
+        """This method initializes a rectangle
 
         Args:
             width (int, optional): width of the rectangle. Defaults to 0.
