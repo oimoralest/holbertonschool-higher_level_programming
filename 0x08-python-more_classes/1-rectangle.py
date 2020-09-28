@@ -51,7 +51,7 @@ class Rectangle():
         Returns:
             int: private instance attribute height
         """
-        return self.__width
+        return self.__height
 
     @height.setter
     def height(self, value):
