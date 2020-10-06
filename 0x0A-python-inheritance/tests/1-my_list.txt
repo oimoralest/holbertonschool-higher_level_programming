@@ -1,0 +1,71 @@
+The ``1-my_list`` module
+========================
+
+Using ``MyList``
+----------------
+Checking docstring for module:
+        >>> __import__('1-my_list').__doc__ != None
+        True
+
+Checking docstring for MyList:
+        >>> __import__('1-my_list').MyList.__doc__ != None
+	True
+
+Import ``MyList`` from the ``1-my_list`` module:
+        >>> MyList = __import__('1-my_list').MyList
+
+Creating a new Instance:
+	>>> my_list = MyList()
+
+Printing empty my_list:
+	>>> print(my_list)
+	[]
+
+Checking if my_list is a subclass of list:
+	>>> issubclass(MyList, list)
+	True
+
+Checking append:
+	>>> my_list.append(4)
+	>>> print(my_list)
+	[4]
+
+Checking insert:
+	>>> my_list.insert(0, 5)
+	>>> print(my_list)
+	[5, 4]
+
+Checking count:
+	>>> my_list.append(3)
+	>>> my_list.append(7)
+	>>> my_list.append(8)
+	>>> my_list.append(5)
+	>>> print(my_list.count(5))
+	2
+
+Checking copy:
+	>>> my_list2 = my_list.copy()
+	>>> print(my_list2)
+	[5, 4, 3, 7, 8, 5]
+
+Checking sorted:
+	>>> my_list.print_sorted()
+	[3, 4, 5, 5, 7, 8]
+
+Checking sorted with negative numbers:
+	>>> my_list.append(-7)
+	>>> my_list.append(-8)
+	>>> my_list.append(-2)
+	>>> my_list.print_sorted()
+	[-8, -7, -2, 3, 4, 5, 5, 7, 8]
+
+Checking clear:
+	>>> my_list.clear()
+	>>> print(my_list)
+	[]
+
+Calling print_sorted with more than 1 argument:
+	>>> my_list.print_sorted("2")
+	Traceback (most recent call last):
+		...
+	TypeError: print_sorted() takes 1 positional argument but 2 were given

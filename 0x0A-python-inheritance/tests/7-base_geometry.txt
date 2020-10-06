@@ -1,0 +1,74 @@
+The ``7-base_geometry`` module
+==============================
+
+Using ``BaseGeometry``
+----------------------
+
+Checking docstring for module:
+        >>> __import__('7-base_geometry').__doc__ != None
+        True
+
+Checking docstring for class:
+	>>> __import__('7-base_geometry').BaseGeometry.__doc__ != None
+	True
+
+Checking docstring for methods:
+	>>> __import__('7-base_geometry').BaseGeometry.integer_validator.__doc__ != None
+	True
+	>>> __import__('7-base_geometry').BaseGeometry.area.__doc__ != None
+	True
+
+Importing class:
+	>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+Creating a new instance:
+	>>> base_geometry = BaseGeometry()
+
+Checking value:
+	>>> base_geometry.integer_validator("Int", 2)
+	>>> base_geometry.integer_validator("Negative", -1)
+	Traceback (most recent call last):
+		...
+	ValueError: Negative must be greater than 0
+	>>> base_geometry.integer_validator("String", "test")
+	Traceback (most recent call last):
+		...
+	TypeError: String must be an integer
+	>>> base_geometry.integer_validator("Zero", 0)
+	Traceback (most recent call last):
+		...
+	ValueError: Zero must be greater than 0
+	>>> base_geometry.integer_validator("List", [1, 2, 3])
+	Traceback (most recent call last):
+		...
+	TypeError: List must be an integer
+
+Checking area:
+	>>> base_geometry.area()
+	Traceback (most recent call last):
+		...
+	Exception: area() is not implemented
+
+Checking calling class with 1 argument:
+	>>> base_geometry = BaseGeometry(1)
+	Traceback (most recent call last):
+		...
+	TypeError: object() takes no parameters
+
+Checking calling integer_validator with no arguments:
+	>>> base_geometry.integer_validator()
+	Traceback (most recent call last):
+		...
+	TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+Checking calling integer_validator with 1 argument:
+	>>> base_geometry.integer_validator("test")
+	Traceback (most recent call last):
+		...
+	TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+Checking calling integer_validator with more than 2 arguments:
+	>>> base_geometry.integer_validator("test", 1, 2)
+	Traceback (most recent call last):
+		...
+	TypeError: integer_validator() takes 3 positional arguments but 4 were given
