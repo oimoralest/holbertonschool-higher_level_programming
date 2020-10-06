@@ -7,7 +7,7 @@
 ## Content
 
 | File | Description |
-| ---- | --- |
+| ------ | --- |
 | [0-lookup.py](./0-lookup.py) | function that returns the list of available attributes and methods of an object |
 | [1-my_list.py](./1-my_list.py) | Module that defines a class `MyList` that inherits from `list` |
 | [2-is_same_class.py](./2-is_same_class.py) | function that returns `True` if the object is exactly an instance of the specified class ; otherwise `False` |
