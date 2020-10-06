@@ -1,0 +1,94 @@
+0x0A. Python - Inheritance
+
+	Inheritance
+		Inheritance allows us to define a derived class that inherits all the methods and 
+		properties from another class.
+
+		The syntax for a derived class definition looks like this:
+
+			class DerivedClassName(BaseClassName):
+				.
+				.
+				.
+
+		The name BaseClassName must be defined in a scope containing the derived class definition.
+		In place of a base class name, other arbitrary expressions are also allowed. This can be 
+		useful, for example, when the base class is defined in another module:
+
+			class DerivedClassName(modname.BaseClassName):
+
+		Execution of a derived class definition proceeds the same as for a base class. When the 
+		class object is constructed, the base class is remembered. This is used for resolving 
+		attribute references: if a requested attribute is not found in the class, the search 
+		proceeds to look in the base class. This rule is applied recursively if the base class 
+		itself is derived from some other .
+
+		Derived classes may override methods of their base classes. Because methods have no special 
+		privileges when calling other methods of the same object, a method of a base class that 
+		calls another method defined in the same base class may end up calling a method of a 
+		derived class that overrides it.
+
+		An overriding method in a derived class may in fact want to extend rather than simply 
+		replace the base class method of the same name. There is a simple way to call the base class 
+		method directly: just call BaseClassName.methodname(self, arguments).
+
+		Python has two built-in functions that work with inheritance:
+
+			- Use isinstance() to check an instance’s type
+
+			- Use issubclass() to check class inheritance
+
+	Multiple Inheritance
+		Python supports a form of multiple inheritance as well. A class definition with multiple 
+		base classes looks like this:
+
+			class DerivedClassName(Base1, Base2, Base3):
+				.
+				.
+				.
+
+	The super() function
+		Python also has a super() function that will make the child class inherit all the methods 
+		and properties from its parent
+
+			class Subclass(Class):
+  				def __init__(self, ...):
+    				super().__init__(...)
+
+    	Also we can add new attributes and methods to the derivated class
+
+    		class Subclass(Class):
+  				def __init__(self, ...):
+    				super().__init__(...)
+    				self.new_attribute = ...
+
+    		new_method(self,...)
+    			.
+    			.
+    			.
+
+    Polymorphism
+    	The word polymorphism means having many forms. In programming, polymorphism means same 
+    	function name (but different signatures) being uses for different types
+
+    		print(len("ABC"))
+    		print(len([1, 2, 3]))
+
+    		The built-in len is use for differents types (string and list respectively)
+
+	Magic methods
+		Magic methods in Python are the special methods which add "magic" to your class. Magic 
+		methods are not meant to be invoked directly by you, but the invocation happens internally 
+		from the class on a certain action. For example, when you add two numbers using the + 
+		operator, internally, the __add__() method will be called
+
+		Built-in classes in Python define many magic methods. Use the dir() function to see the 
+		number of magic methods inherited by a class
+
+		More information: https://www.tutorialsteacher.com/python/magic-methods-in-python
+
+References:
+
+	- https://docs.python.org/3.4/tutorial/classes.html#inheritance
+	- https://www.w3schools.com/python/python_inheritance.asp
+	- https://hub.packtpub.com/inheritance-python/
