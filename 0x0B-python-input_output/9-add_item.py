@@ -8,10 +8,11 @@ from sys import argv
 save_to = __import__("7-save_to_json_file").save_to_json_file
 load_from = __import__("8-load_from_json_file").load_from_json_file
 
+file = "add_item.json"
 try:
-    _list = load_from("add_item.json")
+    _list = load_from(file)
 except (FileExistsError, FileNotFoundError, ValueError):
     _list = []
 for i in argv[1:]:
     _list.append(i)
-save_to(_list, "add_item.json")
+save_to(_list, file)
