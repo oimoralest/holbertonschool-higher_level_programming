@@ -1,0 +1,213 @@
+0x0B. Python - Input/Output
+	Reading and writing files
+		What is a file?
+			A file is a contiguos set of bytes used to store data. This data is organized in a 
+			specific format and can be anything as simple as a text file or as complicated as a 
+			program executable. In the end, these byte files are then translated into binary 1 and 
+			0 for easier processing by the computer.
+
+			Files on most modern files systems are composed of three main parts:
+				- Header: metadata about contents of the file (file name, size, type, and so on)
+				- Data: contents of the file as written by the creator or editor
+				- End of file: special character that indicates the end of the file
+
+			What this data represents depends on the format specification used, which is typically 
+			represented by an extension.
+
+		File Paths
+			When you access a file on an operating system, a file path is required. The file path 
+			is a string that represents the location of a file.
+
+		Line endings
+			One problem often encountered when working with file data is the representation of a 
+			new line or line ending. The line ending has its roots from back in the Morse Code era, 
+			when a specific pro-sign was used to communicate the end of a transmission or the end 
+			of a line.
+
+			Later, this was standardized for teleprinters by both the International Organization 
+			for Standardization (ISO) and the American Standards Association (ASA). ASA standard 
+			states that line endings should use the sequence of the Carriage Return (CR or \r) and 
+			the Line Feed (LF or \n) characters (CR+LF or \r\n). The ISO standard however allowed 
+			for either the CR+LF characters or just the LF character.
+
+			Windows uses the CR+LF characters to indicate a new line, while Unix and the newer Mac 
+			versions use just the LF character. This can cause some complications when you’re 
+			processing files on an operating system that is different than the file’s source.
+
+		Character encodings
+			Another common problem that you may face is the encoding of the byte data. An encoding 
+			is a translation from byte data to human readable characters. This is typically done by 
+			assigning a numerical value to represent a character. The two most common encodings are 
+			the ASCII and UNICODE Formats. ASCII can only store 128 characters, while Unicode can 
+			contain up to 1,114,112 characters.
+
+			ASCII is actually a subset of Unicode (UTF-8), meaning that ASCII and Unicode share the 
+			same numerical to character values. It’s important to note that parsing a file with the 
+			incorrect character encoding can lead to failures or misrepresentation of the character.
+			For example, if a file was created using the UTF-8 encoding, and you try to parse it 
+			using the ASCII encoding, if there is a character that is outside of those 128 values, 
+			then an error will be thrown.
+
+		Opening and closing a File
+			When you want to work with a file, the first thin to do is to open it. This is done by 
+			invoking the open() built-in.
+
+				file = open("path_to_the_file")
+
+			Always that you open a file it is mandatory to close it. This is done by invoking the 
+			close() method.
+
+				file.close()
+
+			The second way to close a file is to use the with statement:
+
+				with open("path_to_the_file") as file:
+				...
+
+			The with statement automatically takes care of closing the file once it leaves the with 
+			block, even in cases of error.
+
+			Open has a second positional argument, `mode`. This argument is a string that contains 
+			multiple characters to represent how you want to open a file:
+
+				- "r" : open for reading (default)
+				- "w" : open for writing, truncating (overwriting) the file first
+				- "rb" or "wb": open in binary mode (using byte data)
+
+		What is a file object?
+			“an object exposing a file-oriented API (with methods such as read() or write()) to an 
+			underlying resource.”
+
+			There are three different categories of file objects and each of these are defined in 
+			the `io` module:
+
+				- Text files: <class '_io.TextIOWrapper'>. It is the common one
+				- Buffered binary files: <class '_io.Buffered...'>. It is used for reading and 
+				writing binary files.
+				- Raw binary files: <class '_io.FileIO'>. It is generally used as a low-level 
+				building-block for binary and text streams
+
+		Reading and writing opened files
+			Reading
+				There are multiple methods that can be called on a file object to read it:
+
+					- file.read(size=-1): reads from the file based on the number of `size` bytes. If 
+					no argument is passed or None or -1 is passed, the entire file is read.
+					- file.readline(size=-1): reads at most `size` number of characters from the line. 
+					This continues to the end of the line and then wraps back around. If no argument is 
+					passed or None or -1 is passed, then the entire line (or rest of the line) is read.
+					- file.readlines(): This reads the remaining lines from the file object and returns 
+					them as a list.
+
+				Iterating over each line in the file
+					You can iterate over each line taking into account the EOF:
+
+						with open("path_to_the_file") as file:
+							line = file.readline()
+							while line != "": """EOF char is an empty string"""
+								...
+								line = file.readline()
+
+						with open("path_to_the_file") as file:
+							for line in file.readlines():
+								...
+
+						with open("path_to_the_file") as file:
+							for line in file:
+								...
+
+			Writing
+				There are multiple methods that can be called on a file object to write in it:
+
+					- file.write(string): writes the string to the file
+					- file.writelines(seq): writes the sequence to the file. No line endings are 
+					appended to each sequence item. It’s up to you to add the appropriate line 
+					ending(s)
+
+		Tips and tricks
+			__file__
+				Special attribute of modules, similar to __name__:
+					the pathname of the file from which the module was loaded, if it was loaded 
+					from a file
+
+			Appending to a file
+				This is easily done by using the 'a' character for mode argument:
+
+					with open("path_to_the_file", "a") as file:
+						file.write("\nAppending")
+
+			Working With Two Files at the Same Time
+
+				with open(d_path, 'r') as reader, open(d_r_path, 'w') as writer:
+					lines = reader.readlines()
+					writer.writelines(lines)
+
+			Creating Your Own Context Manager
+				If you want to open a file with a class you may have to add magic methods __enter__ 
+				and __exit__
+
+					class my_file_reader():
+						def __init__(self, file_path):
+							self.__path = file_path
+							self.__file_object = None
+
+						def __enter__(self):
+							self.__file_object = open(self.__path)
+							return self
+
+						def __exit__(self, type, val, tb):
+							self.__file_object.close()
+
+						...
+
+					with my_file_reader('dog_breeds.txt') as reader:
+						...
+
+			Don’t Re-Invent the Snake
+				There are built-in libraries out there that you can use to help you:
+
+					wave: read and write WAV files (audio)
+					aifc: read and write AIFF and AIFC files (audio)
+					sunau: read and write Sun AU files
+					tarfile: read and write tar archive files
+					zipfile: work with ZIP archives
+					configparser: easily create and parse configuration files
+					xml.etree.ElementTree: create or read XML based files
+					msilib: read and write Microsoft Installer files
+					plistlib: generate and parse Mac OS X .plist files
+
+				There are plenty more out there. Additionally there are even more third party tools 
+				available on PyPI. Some popular ones are the following:
+
+					PyPDF2: PDF toolkit
+					xlwings: read and write Excel files
+					Pillow: image reading and manipulation
+
+			If you want to re-read a file
+
+				file.seek(0)
+				file.read()
+
+			If you want to use an encoding
+
+				open(..., encoding="enconding style(i.e: utf-8")
+
+			Reading from non-file
+
+				import io: to read StringIO class see more: https://docs.python.org/3/library/io.html
+
+				or
+
+				from sys import stdin, stdout, stderr: to read or write to standard input, output 
+				and error respectively
+
+	JSON encoder and decoder
+		JSON (JavaScript Object Notation), is a lightweight data interchange format inspired by 
+		JavaScript object literal syntax.
+
+		json exposes an API familiar to users of the standard library marshal and pickle modules
+
+		Use
+			import json
+
+			decoder and encoder tables: https://docs.python.org/3.4/library/json.html#encoders-and-decoders
