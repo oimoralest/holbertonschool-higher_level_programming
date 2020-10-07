@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     try:
         _list = load_from("add_item.json")
-    except Exception:
+    except:
         _list = []
     for i in argv[1:]:
         _list.append(i)
