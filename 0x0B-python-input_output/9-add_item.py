@@ -10,7 +10,7 @@ load_from = __import__("8-load_from_json_file").load_from_json_file
 
 try:
     _list = load_from("add_item.json")
-except:
+except (FileExistsError, FileNotFoundError, ValueError):
     _list = []
 for i in argv[1:]:
     _list.append(i)
