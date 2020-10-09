@@ -200,14 +200,3 @@
 
 				from sys import stdin, stdout, stderr: to read or write to standard input, output 
 				and error respectively
-
-	JSON encoder and decoder
-		JSON (JavaScript Object Notation), is a lightweight data interchange format inspired by 
-		JavaScript object literal syntax.
-
-		json exposes an API familiar to users of the standard library marshal and pickle modules
-
-		Use
-			import json
-
-			decoder and encoder tables: https://docs.python.org/3.4/library/json.html#encoders-and-decoders
