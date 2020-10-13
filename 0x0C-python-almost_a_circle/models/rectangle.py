@@ -31,7 +31,7 @@ class Rectangle(Base):
         """
         Setter for width
         """
-        Rectangle.raise_("width", value)
+        Rectangle.checking("width", value)
         self.__width = value
 
     @property
@@ -46,7 +46,7 @@ class Rectangle(Base):
         """
         Setter for height
         """
-        Rectangle.raise_("height", value)
+        Rectangle.checking("height", value)
         self.__height = value
 
     @property
@@ -61,7 +61,7 @@ class Rectangle(Base):
         """
         Setter for x
         """
-        Rectangle.raise_("x", value)
+        Rectangle.checking("x", value)
         self.__x = value
 
     @property
@@ -76,20 +76,20 @@ class Rectangle(Base):
         """
         Setter for y
         """
-        Rectangle.raise_("y", value)
+        Rectangle.checking("y", value)
         self.__y = value
 
     @staticmethod
-    def raise_(name, value):
-        """
-        This method checks for type(name) = int. Also checks for values
-        """
-        if type(value) is not int:
-            raise TypeError("{:s} must be an integer".format(name))
-        elif (name == "width" or name == "heigth") and value <= 0:
-            raise ValueError("{:s} must be > 0".format(name))
+    def checking(name, value):
+        '''
+        static method for handle the raise exceptions
+        '''
+        if type(value) != int:
+            raise TypeError("{} must be an integer".format(name))
+        if (name == "width" or name == "height") and value <= 0:
+            raise ValueError("{} must be > 0".format(name))
         elif (name == "x" or name == "y") and value < 0:
-            raise ValueError("{:s} must be >= 0".format(name))
+            raise ValueError("{} must be >= 0".format(name))
 
     def area(self):
         """
