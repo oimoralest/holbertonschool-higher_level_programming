@@ -76,7 +76,6 @@ class Base:
             with open(filename) as file_:
                 jlist_ = Base.from_json_string(file_.read())
                 for obj in jlist_:
-                    print(obj)
                     list_.append(cls.create(**obj))
         except Exception:
             pass
