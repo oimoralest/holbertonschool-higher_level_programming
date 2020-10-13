@@ -78,7 +78,7 @@ class Base:
                 for obj in jlist_:
                     print(obj)
                     list_.append(cls.create(**obj))
-        except:
+        except Exception:
             pass
         return list_
 
