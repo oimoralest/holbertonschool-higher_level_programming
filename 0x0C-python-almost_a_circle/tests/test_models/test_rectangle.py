@@ -120,6 +120,21 @@ class TestRectangle(unittest.TestCase):
             r2.display()
         out = stout.getvalue()
         self.assertEqual(out, ("#" * 5 + "\n") * 10)
+        r3 = Rectangle(5, 2, 1, 2)
+        stout = StringIO()
+        with redirect_stdout(stout):
+            r3.display()
+        out = stout.getvalue()
+        self.assertEqual(out, "\n" * 2 + (" " * 1 + "#" * 5 + "\n") * 2)
+
+    def test_str(self):
+        """
+        Checks __str__ function
+        """
+        r = Rectangle(2, 5, 8, 2, 2)
+        self.assertEqual(r.__str__(), "[Rectangle] (2) 8/2 - 2/5")
+        r2 = Rectangle(1, 1, 0, 0, 3)
+        self.assertEqual(r2.__str__(), "[Rectangle] (3) 0/0 - 1/1")
 
 
 if __name__ == '__main__':
