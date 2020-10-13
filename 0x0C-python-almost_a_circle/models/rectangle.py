@@ -31,7 +31,7 @@ class Rectangle(Base):
         """
         Setter for width
         """
-        Rectangle.checking("width", value)
+        Rectangle.raise_("width", value)
         self.__width = value
 
     @property
@@ -46,7 +46,7 @@ class Rectangle(Base):
         """
         Setter for height
         """
-        Rectangle.checking("height", value)
+        Rectangle.raise_("height", value)
         self.__height = value
 
     @property
@@ -61,7 +61,7 @@ class Rectangle(Base):
         """
         Setter for x
         """
-        Rectangle.checking("x", value)
+        Rectangle.raise_("x", value)
         self.__x = value
 
     @property
@@ -76,14 +76,14 @@ class Rectangle(Base):
         """
         Setter for y
         """
-        Rectangle.checking("y", value)
+        Rectangle.raise_("y", value)
         self.__y = value
 
     @staticmethod
-    def checking(name, value):
-        '''
-        static method for handle the raise exceptions
-        '''
+    def raise_(name, value):
+        """
+        Handle the raise exceptions
+        """
         if type(value) != int:
             raise TypeError("{} must be an integer".format(name))
         if (name == "width" or name == "height") and value <= 0:
