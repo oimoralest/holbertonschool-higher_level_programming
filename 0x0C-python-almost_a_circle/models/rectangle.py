@@ -85,11 +85,11 @@ class Rectangle(Base):
         This method checks for type(name) = int. Also checks for values
         """
         if type(value) is not int:
-            raise TypeError("{} must be an integer".format(name))
-        elif name in ["width", "heigth"] and value <= 0:
-            raise ValueError("{} must be > 0".format(name))
-        elif name in ["x", "y"] and value < 0:
-            raise ValueError("{} must be >= 0".format(name))
+            raise TypeError("{:s} must be an integer".format(name))
+        elif (name == "width" or name == "heigth") and value <= 0:
+            raise ValueError("{:s} must be > 0".format(name))
+        elif (name == "x" or name == "y") and value < 0:
+            raise ValueError("{:s} must be >= 0".format(name))
 
     def area(self):
         """
