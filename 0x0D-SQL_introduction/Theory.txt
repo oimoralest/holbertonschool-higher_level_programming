@@ -1,0 +1,177 @@
+0x0D. SQL - Introduction
+    What is Database & SQL?
+        What is data?
+            Data can be facts related to any object in consideration like name,
+            age, height, weight, picture, images. file, pdf...etc
+
+        What is a database?
+            A database is a sytematic collection of data. Since the data in a
+            database is organized, it makes data management easy.
+
+        What is a database management system (DBMS)?
+            It is a collection of programs which enables its users to access
+            database, manipulte data, & help in representation data. It also
+            helps control access to the database by various users.
+
+        Types of DBMS
+            - Hierarchical: This type employs the parent-child relationship of
+            storing data. Its structure is like a tree with nodes representing
+            records and branches representing fields
+            - Network DBMS: This type supports many to many relationships this
+            usually results comples database structures
+            - Relational DBMS: This type defines database relationships in form
+            of tables also known as relations. Usually has predefined data
+            types that they can support. This is the most popular DBMs type in
+            the market.
+            - Object oriented relation DBMS: This type supports storage of new
+            data types, the data to be stored is in the form of objects.
+
+        What is SQL?
+            structured Query Language is actually the standard language for
+            dealing with relational databases. It Allows us INSERT, SEARCH,
+            UPDATE, AND DELETE DATABASE RECORDS.
+
+            MySQL, ORACLE, MS SQL SERVER, SYBASE use SQL.
+
+    Basics of MySQL
+        Installing MySQL on Ubuntu
+
+            sudo apt-get install mysql-server
+
+        How to access the MySQL shell
+
+            mysql -u root -p
+
+            To keep in mind:
+                - All MySQL commands end with semicolon; if the phrase does not
+                end with a semicolon, the command will not execute
+
+        How to create and delete a MySQL database
+            MySQL organizes its information into databases; each one can hold
+            tables with specific data.
+
+            We can quickly check what databases are avaible by typing:
+
+                SHOW DATABASES;
+
+            Creating a database is very easy:
+
+                CREATE DATABASE database_name;
+
+            The phrase most often used to deleted objects is Drop:
+
+                DROP DATABASE database_name;
+
+        How to access a MySQL Database
+            Once we have a new database, we can begin to fill it with
+            information.
+
+            The first step is to create a new table within the larger database.
+
+            Open the database we want to use:
+
+                USE database_name
+
+            We can see an overview of the tables that the database contains
+
+                SHOW tables;
+
+        How to create a MySQL table
+            Let's create a new MySQL table like:
+
+                CREATE TABLE table_name(item_name data_type,...);
+
+                Each item will be a column in our table.
+
+            We can see our table organization with:
+
+                DESCRIBE table_name;
+
+        How to add information to a MySQL table
+            We use the following format to insert information into each row:
+
+                INSERT INTO `table_name` (items) VALUES(Values_of_each_item_separated_by_colon);
+
+            We can take a look at our table with:
+
+                SELECT * FROM table_name;
+
+        How to update information in the table
+            We use:
+
+                UPDATE `table_name`
+                SET
+                `item_name` = `value`
+                WHERE `table_name`.`item_with_a_relation` = `value_of_item_with_a_relation`
+
+        How to add and delete a column
+            We can easily add with this:
+
+                ALTER TABLE table_name ADD item type_of_item;
+
+            If we want to add to place the new column in a specific spot in the
+            table, we use:
+
+                ALTER TABLE table_name ADD item type_of_item AFTER item_name;
+
+            We can delete a delete a column with:
+
+                ALTER TABLE  table_name DROP item_name;
+
+        How to delete a row
+            We can use the following command:
+
+                DELETE from [table_name] where [item_name]=[value_of_item];
+
+        DDL and DML
+            SQL statements are divided into two major categories:
+
+                Data definition language (DDL):
+                    DLL statements are used to build and modify the structure
+                    of our tables and other objects in the database. When we
+                    execute a DDL statement, it takes effect immediately
+
+                Data manipulation language (DML):
+                    DML statements are used to work with the data in tables
+
+        Data types
+            The data types that we will use most frequently are character
+            strings, which might be called VARCHAR or CHAR for variable or
+            fixed length strings; numeric types such as NUMBER or INTEGER,
+            which will usually specify a precision; and DATE or related types.
+
+            Data type syntax is variable from system to system. We must consult
+            the documentation for our own software
+
+        Basic Queries
+            Retrieving data from one table
+                In SQL, to retrieve data stored in our tables, we use the
+                SELECT statement.
+
+                Basic syntax:
+
+                    SELECT {attribute}+
+                        FROM {table_name}+
+                        [WHERE {boolean predicate to pick rows}]
+                        [ORDER BY {attribute}+];
+
+                The SELECT clause allows us to specify a comma-separated list
+                of attribute names corresponding to the columns that are to be
+                retrieved. We can use an asterisk character, *, to retrieve all
+                the columns
+
+                The FROM clause is where we specify the name of the table from
+                which to retrieve rows.
+
+                The WHERE clause is used to constrain which rows to retrieve.
+                We do this by specifying a boolean predicate that compares the
+                values of table columns to literal values or to other columns
+
+                The ORDER BY clause gives us a way to order the display of the
+                rows in the result of the statement.
+
+    MySQL Cheat Sheet
+        Link: https://intellipaat.com/mediaFiles/2019/02/SQL-Commands-Cheat-Sheet.pdf
+
+    MySQL statement syntax
+        Link: https://dev.mysql.com/doc/refman/5.7/en/sql-statements.html
