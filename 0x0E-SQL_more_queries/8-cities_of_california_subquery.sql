@@ -5,13 +5,13 @@ SELECT
     id,
     name
     FROM
-        hbtn_0d_usa.cities
+        cities
     WHERE
         state_id=(
             SELECT
                 id
                 FROM
-                    hbtn_0d_usa.states
+                    states
                 WHERE
                     name='California'
         ) ORDER BY id;
