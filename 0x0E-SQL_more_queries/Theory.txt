@@ -1,0 +1,151 @@
+0x0E. SQL - More queries
+    How to create a new user and grant perimissions in MySQL
+        To create a new user we use:
+
+            CREATE USER `newuser`@`localhost` IDENTIFIED BY `password`;
+
+        localhost is a hostname which means "this computer" and MySQL treats
+        this particular hostname specially: when a user with that host logs
+        into MySQL it will attempt to connect to the local server by using a
+        Unix socket file. Thus, localhost is tipically used when you plan to
+        connect by SSHing into your server or when you are running the local
+        mysql client to connect to the local MySQL server.
+
+        At this point newuser has no perimissions to do anything with the
+        databases. Therefore, the first thing to do is to provide the user with
+        access to the information they will need.
+
+            GRANT ALL PRIVILEGES ON * . * TO `newuser`@`localhost`;
+
+        The asterisks in this command refer to the database and table
+        respectively that they can access. This command allows to the user to
+        read, edit, execute and perform all tasks across all the databases and
+        tables. This is impractical for most use cases and could put our
+        database's security at high risk.
+
+        Once we have finalized the perimissions that we want to set up for our
+        new users, we need to be sure to reload all the privileges
+
+            FLUSH PRIVILEGES;
+
+        How to grant different user perimissions
+            Here is a short list of common posssible permissions:
+
+                - ALL PRIVILEGES: allows a MySQL user full acces to a designed
+                database (or if no database is selected, global access across
+                the system)
+                - CREATE: allows to a user create new tables or databases
+                - DROP: allows to a user delete tables or databases
+                - DELETE: allows to a user delete rows from tables
+                - INSERT: allows to a user insert rows into tables
+                - SELECT: allows to a user use the SELECT command to read
+                through databases
+                - UPDATE: allows to a user update table rows
+                - GRANT OPTION: allows to a user grant or remove other users'
+                privileges
+
+            In the following link there is table with more type_of_permission:
+                https://www.mysqltutorial.org/mysql-grant.aspx
+
+            Therefore, we can follow this framework:
+
+                GRANT type_of_permission ON database_name.table_name TO `user_name`@`localhost`;
+
+            Follow by:
+
+                FLUSH PRIVILEGES;
+
+            If we need to revoke a permission, the structure is almost
+            identical to grant it:
+
+                REVOKE type_of_permission ON database_name.table_name FROM `user_name`@`localhost`;
+
+            We can review a user's current permissions by running the following:
+
+                SHOW GRANTS FOR `user_name`@`localhost`;
+
+        Just as we can delete databases with DROP, we can use DROP to delete a
+        user:
+
+            DROP USER `user_name`@`localhost`;
+
+    How to use MySQL GRANT statement to grant privileges to a user
+        We can apply specific privileges on users.
+            Column privileges:
+
+                GRANT type_of_permission columns... ON database_name.table_name TO `user_name`@`localhost`;
+
+            Stored routine prvileges:
+
+                GRANT EXECUTE ON PROCEDURE function_name TO `user_name`@`localhost`;
+
+            `user_name`@`localhost` can execute the stored procedure
+            function_name in the current database
+
+            Proxy user privileges:
+
+                GRANT PROXY ON user_name_2 TO `user_name`@`localhost`;
+
+            `user_name`@`localhost`; assumes all privileges of user_name_2
+
+    MySQL constraints
+        Constraints are placed on clumns or tables. They limit the data that
+        can be inserted into tables.
+
+        We can use the following constraints:
+            - NOT NULL: A column with a NOT NULL constraint, cannot have NULL
+            values
+
+                CREATE TABLE table_name(column_name TEXT NOT NULL...);
+
+            - UNIQUE: The UNIQUE constraint ensures that all data are unique
+            in a column
+
+                CREATE TABLE table_name(column_name type_of_data UNIQUE...);
+
+            - PRIMARY KEY: The PRIMARY KEY constraint uniquely identifies each
+            record in a database table. It si a special case of unique keys.
+            Primary cannot be NULL, unique keys can be. There can be more
+            UNIQUE columns, but only one primary key in a table. Primary keys
+            are unique ids, we use them to refer to table rows. Primary keys
+            becomes foreign keys in other tables, when creating relations
+            among tables
+
+                CREATE TABLE table_name(column_name type_of_data PRIMARY KEY...);
+
+            - FOREIGN KEY: A FOREIGN KEY in one table points to a PRIMARY KEY
+            in another table. IT is a referential constraint between two tables.
+            The foreign key identifies a column or a set of columns in one table
+            that refers to a column or set of columns in another table
+
+                CREATE TABLE table_name(column_name type_of_data PRIMARY KEY...) type=InnoDB;
+
+                CREATE TABLE table_name_2(..., FOREIGN KEY(column_name) REFERENCES table_name(column_name)) type=InnoDB;
+
+                What would foreign key enforcement mean in our example? We could
+                not insert a row into the table_name_2 with an column_name,
+                which is not present in table_name.
+
+            - ENUM: An ENUM is a string object with a value chosen from a list
+            of permitted values.They are enumerated explicitly in the column
+            specification at table creation time
+
+                CREATE TABLE table_name(column_name ENUM(values_list)...);
+
+                if a value is not available in the values_list, an empty string
+                is inserted
+
+            - SET: A SET can have zero or more values. Each of these values
+            must be chosen from a list of permitted values
+
+                CREATE TABLE table_name(column_name SET(values_list)...);
+
+                Any row can have zero or more than one values from values_list
+
+    SQL: subqueries
+        We can nested queries it is required:
+
+            SELECT columns... FROM table_name WHERE column_name=(SELECT column_name FROM table_name WHERE constraints);
+
+    SQL: the join
+        
