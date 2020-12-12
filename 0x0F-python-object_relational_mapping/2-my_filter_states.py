@@ -12,6 +12,7 @@ if __name__ == "__main__":
                    id ASC".format(argv[4]))
     rows = cursor.fetchall()
     for row in rows:
-        print(row)
+        if row[1] == argv[4]:
+           print(row)
     cursor.close()
     database.close()
