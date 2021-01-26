@@ -1,3 +1,2 @@
 # High Level Programming
-
-This repo contain some topics related with the high level programming in Python
+    The aim of this repository is to learn all the basic skills in  Python Programming Language
