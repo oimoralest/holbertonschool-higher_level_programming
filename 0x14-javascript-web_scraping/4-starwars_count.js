@@ -12,16 +12,14 @@ request({
   if (err) {
     console.log(err);
   } else if (response.statusCode === 200) {
-    request
-      .get({
-        url: 'https://swapi-api.hbtn.io/api/people/18/',
-        method: 'GET'
-      }, (err, response, body) => {
-        if (err) {
-          console.log(err)
-        } else if (response.statusCode === 200) {
-          console.log(JSON.parse(body).films.length)
-        }
-      })
+    let counter = 0;
+    for (const movie of JSON.parse(body).results) {
+      if (movie.characters.includes('https://swapi-api.hbtn.io/api/people/18/')) {
+        counter++;
+      }
     }
+    console.log(counter);
+  } else {
+    throw Error('An error was ocurred!');
+  }
 });
