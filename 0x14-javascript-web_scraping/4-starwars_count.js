@@ -14,12 +14,11 @@ request({
   } else if (response.statusCode === 200) {
     let counter = 0;
     for (const movie of JSON.parse(body).results) {
-      if (movie.characters.includes('https://swapi-api.hbtn.io/api/people/18/')) {
+      const string = new String(movie.characters)
+      if (string.includes('/18/')) {
         counter++;
       }
     }
     console.log(counter);
-  } else {
-    throw Error('An error was ocurred!');
   }
 });
