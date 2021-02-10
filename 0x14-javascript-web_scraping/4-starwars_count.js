@@ -14,7 +14,7 @@ request({
   } else if (response.statusCode === 200) {
     let counter = 0;
     for (const movie of JSON.parse(body).results) {
-      const string = new String(movie.characters)
+      const string = movie.characters.toString();
       if (string.includes('/18/')) {
         counter++;
       }
